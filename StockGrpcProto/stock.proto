@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "StockGrpcProto";
+
+package stock;
+
+service StockExchange {
+  rpc GetStockValue (StockRequest) returns (StockValue);
+  rpc StreamStockValue (StockRequest) returns (stream StockValue);
+}
+
+message StockRequest {
+  string symbol = 1;
+}
+
+message StockValue {
+  double amount = 1;
+  string currency = 2;
+  google.protobuf.Timestamp time = 3;
+}
